@@ -67,6 +67,32 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
+#### POST `/Upload`
+
+**Body:** `form-data`
+| Parameter | Deskripsi |
+|-----------|-----------|
+| file type: file     | file .tif |
+
+
+**Headers:**
+```
+Authorization: Bearer <jwt_token>
+```
+
+**Response Success (201):**
+```json 
+
+{
+    "status": "success",
+    "message": "Sukes Upload File ke Server",
+    "filename": "dummy.tif"
+}
+
+
+```
+
+  
 ### Citra Satelit (Coming Soon)
 - Upload citra satelit
 - Load file GeoTiff
@@ -85,7 +111,7 @@ Authorization: Bearer <jwt_token>
 - [x] Register
 - [x] Login
 - [x] Get user info
-- [ ] Upload citra satelit
+- [x] Upload citra satelit
 - [ ] Load file GeoTiff
 - [ ] Simpan hasil di server
 - [ ] Handle prediksi model segmentasi

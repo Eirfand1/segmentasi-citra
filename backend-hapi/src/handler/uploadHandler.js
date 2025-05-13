@@ -1,0 +1,32 @@
+const fs = require('fs')
+const path = require('path')
+
+module.exports = {
+	async upload(req, h) {
+		const { file } = req.payload
+
+		const filename = file.hapi.filename
+		const uploadPath = path.join(__dirname, '../', 'uploads', filename)
+		const fileStream = fs.createWriteStream(uploadPath)
+
+		try {
+			await new Promise((resolve, rejects) => {
+				file.pipe(fileStream)
+				file.on('end', resolve)
+				file.on('error', rejects)
+			})
+
+			return h.response({
+				status: 'success',
+				message: 'Sukes Upload File ke Server',
+				filename
+			}).code(201)
+		} catch(err) {
+			console.error(err)
+			return h.response({
+				status: 'fail',
+				message: 'Upload Error'
+			})
+		}
+	}
+}

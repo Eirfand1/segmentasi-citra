@@ -4,6 +4,7 @@ const Hapi = require('@hapi/hapi')
 const helloworld = require('./routes/helloworld')
 const userRoutes = require('./routes/userRoutes')
 const Jwt = require('@hapi/jwt')
+const uploadRoutes = require('./routes/uploadRoutes')
 
 const init = async () => {
 	const server = Hapi.server({
@@ -37,7 +38,7 @@ const init = async () => {
 	
 	server.route(helloworld)
 	server.route(userRoutes)
-
+	server.route(uploadRoutes)
 
 	await server.start()
 	console.log('Server running on %s', server.info.uri)
