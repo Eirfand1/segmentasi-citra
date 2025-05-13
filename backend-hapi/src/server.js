@@ -1,52 +1,27 @@
 'use strict'
-
 const Hapi = require('@hapi/hapi')
-const helloworld = require('./routes/helloworld')
-const userRoutes = require('./routes/userRoutes')
-const Jwt = require('@hapi/jwt')
-const uploadRoutes = require('./routes/uploadRoutes')
+const registerAuth = require('./middleware/auth')
+const registerStaticRoutes = require('./middleware/static')
+const registerRoutes = require('./middleware/routes')
 
 const init = async () => {
-	const server = Hapi.server({
-		port: 3000,
-		host: 'localhost'
-	})
+  const server = Hapi.server({
+    port: 3000,
+    host: 'localhost'
+  })
 
+  // register middleware
+  await registerAuth(server)
+  await registerStaticRoutes(server)
+  await registerRoutes(server)
 
-    await server.register(Jwt);
-
-	server.auth.strategy('jwt', 'jwt', {
-		keys: 'RAHASIA_BANGET',
-		verify: {
-			aud: false,
-			iss: false,
-			sub: false,
-			maxAgeSec: 86400,
-		},
-		validate : async(artifacts)=> {
-			return {
-				isValid: true,
-				credentials: {
-					user: artifacts.decoded.payload 
-				}
-			}
-		}
-		
-	})
-
-	server.auth.default('jwt')
-	
-	server.route(helloworld)
-	server.route(userRoutes)
-	server.route(uploadRoutes)
-
-	await server.start()
-	console.log('Server running on %s', server.info.uri)
+  await server.start()
+  console.log('Server running on %s', server.info.uri)
 }
 
 process.on('unhandledRejection', (err) => {
-	console.log(err)
-	process.exit(1)
+  console.log(err)
+  process.exit(1)
 })
 
 init()

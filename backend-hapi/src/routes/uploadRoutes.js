@@ -16,5 +16,14 @@ module.exports = [
 			auth: 'jwt'	
 		}
 		
+	},
+
+	{
+		method: 'GET',
+		path: '/uploads',
+		handler: uploadHandler.list,
+		options: {
+			auth: 'jwt'
+		}
 	}
 ]

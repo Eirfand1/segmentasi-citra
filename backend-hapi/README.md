@@ -91,8 +91,43 @@ Authorization: Bearer <jwt_token>
 
 
 ```
+#### GET `/uploads`
 
-  
+Hanya mendapatkan semua data image menurut user yang login <br>
+
+**Headers:**
+```
+Authorization: Bearer <jwt_token>
+```
+
+**Response Success (201):**
+```json 
+
+{
+    "status": "success",
+    "data": [
+        {
+            "id": "9f40a534-c813-4bc4-ac9e-f9172e3171a6",
+            "file_name": "dummy.tif",
+            "uploaded_at": "2025-05-13T18:02:58.482Z",
+            "url": "/images/dummy.tif"
+        },
+        {
+            "id": "afb8d9a4-5c0c-4240-bc48-503a5a18476c",
+            "file_name": "bodoh.tif",
+            "uploaded_at": "2025-05-13T17:47:58.315Z",
+            "url": "/images/bodoh.tif"
+        }
+    ]
+}
+
+```
+
+#### GET file statis(image) `/images/nameimages.tif`
+
+Response berupa gambar langsung tidak perlu login
+
+
 ### Citra Satelit (Coming Soon)
 - Upload citra satelit
 - Load file GeoTiff
