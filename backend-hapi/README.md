@@ -1,79 +1,79 @@
-# 📦 Citra Satelit API (Hapi.js + PostgreSQL)
+# 📦 Citra Satelit API
 
-API ini digunakan untuk mengelola segmentasi citra satelit
-
----
+API untuk mengelola segmentasi citra satelit menggunakan Hapi.js dan PostgreSQL.
 
 ## 🛠 Base URL
 ```
 http://localhost:3000
 ```
 
----
+## 📁 Endpoints
 
-## 📁 Endpoints User
+### Autentikasi
+
+#### 🔹 POST `/register`
+Mendaftarkan pengguna baru ke sistem.
 
 **Body:** `application/x-www-form-urlencoded`
+| Parameter | Deskripsi |
+|-----------|-----------|
+| name      | Nama pengguna |
+| email     | Email pengguna |
+| password  | Password pengguna |
 
-### 🔹 POST `/register`
-Ambil semua data produk.
-
-**Response:**
+**Response Success (200):**
 ```json
-	{
+{
   "message": "Registrasi Berhasil",
-  "user": [
-    {
-      "id": "uuid",
-      "name": "useri",
-      "email": "name.fandi07@proton.me",
-      
-    }
-  ]
+  "user": {
+    "id": "uuid",
+    "name": "user",
+    "email": "name.fandi07@proton.me"
+  }
 }
 ```
 
-### 🔹 POST `/login`
-Tambah data produk baru.
+#### 🔹 POST `/login`
+Melakukan autentikasi pengguna.
 
 **Body:** `application/x-www-form-urlencoded`
-```
+| Parameter | Deskripsi |
+|-----------|-----------|
+| email     | Email pengguna |
+| password  | Password pengguna |
 
-**Sertakan Header** <br>
-
-Authorization: Bearer <jwt token> <br>
-
-|email    | email@user |
-|password | password   |
-
-
-```
-
-**Response:**
+**Response Success (200):**
 ```json
 {
   "message": "Login Berhasil",
-  "data": "jwt token"
+  "data": "jwt_token"
 }
 ```
 
-### 🔹 GET `/me
+#### 🔹 GET `/me`
+Mendapatkan informasi pengguna yang sedang login.
 
-header = Authorization: Bearer <jwt> <br>
+**Headers:**
+```
+Authorization: Bearer <jwt_token>
+```
 
-**Response**
+**Response Success (200):**
 ```json
-
 {
-    "id": "804b09e5-e98d-41db-a72f-1cff73e3bf4f",
-    "name": "Ego Irfandi",
-    "email": "name.fandi07@proton.me"
+  "id": "804b09e5-e98d-41db-a72f-1cff73e3bf4f",
+  "name": "Ego Irfandi",
+  "email": "name.fandi07@proton.me"
 }
-
 ```
----
 
-## ⚠️ Error Format
+### Citra Satelit (Coming Soon)
+- Upload citra satelit
+- Load file GeoTiff
+- Proses segmentasi
+- Simpan hasil di server
+
+## ⚠️ Format Error
 ```json
 {
   "success": false,
@@ -81,16 +81,13 @@ header = Authorization: Bearer <jwt> <br>
 }
 ```
 
----
-
-## 📌 Todo
-- [x] register
-- [x] login
-- [ ] upload citra satelit
-- [ ] load file GeoTiff
-- [ ] simpan hasil di server
-- [ ] handle prediksi model segmentasi
-- [ ] Validasi dasar dilakukan manual tanpa Joi
-- [ ] File .env buat security(males bet anj)
-
-
+## 📌 Status Pengembangan
+- [x] Register
+- [x] Login
+- [x] Get user info
+- [ ] Upload citra satelit
+- [ ] Load file GeoTiff
+- [ ] Simpan hasil di server
+- [ ] Handle prediksi model segmentasi
+- [ ] Validasi data dengan Joi
+- [ ] Konfigurasi keamanan dengan .env
