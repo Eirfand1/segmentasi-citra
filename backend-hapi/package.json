@@ -1,0 +1,21 @@
+{
+  "name": "hepi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@hapi/hapi": "^21.4.0",
+    "@hapi/jwt": "^3.2.0",
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.9",
+    "pg": "^8.14.1"
+  }
+}

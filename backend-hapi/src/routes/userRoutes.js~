@@ -1,0 +1,23 @@
+const userHandler = require('../handler/userHandler')
+
+module.exports = [
+	{
+		method: 'POST',
+		path: '/register',
+		handler: userHandler.register
+	},
+	{
+		method: 'POST',
+		path: '/login',
+		handler: userHandler.login
+	},
+	{
+		method: 'GET',
+		path: '/me',
+		handler: userHandler.me,
+		options: {
+			auth: 'jwt'
+		}
+	}
+]
+
