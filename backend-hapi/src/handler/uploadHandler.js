@@ -51,7 +51,7 @@ module.exports = {
 			id: upload.id,
 			file_name: upload.file_name,
 			uploaded_at: upload.uploaded_at,
-			url: `/images/${upload.file_name}`
+			url: `/upload/${upload.file_name}`
 		}))
 
 		return h.response({
